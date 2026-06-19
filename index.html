@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anne studio — Servicios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF5EF;
+    --rose-lt: #EDD5C9;
+    --rose: #C4846F;
+    --charcoal: #2C2218;
+    --muted: #9A7A72;
+    --bg: #F5EDE3;
+  }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--charcoal); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,245,239,0.95); backdrop-filter: blur(8px);
+    padding: 18px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(196,132,111,0.15);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; letter-spacing: .08em; color: var(--charcoal); text-decoration: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: .18em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover { color: var(--charcoal); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 80px;
+    background: linear-gradient(160deg, #FAF5EF 60%, #EDD5C9 100%);
+  }
+  .hero-eyebrow { font-size: 10px; font-weight: 400; letter-spacing: .3em; color: var(--muted); margin-bottom: 20px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 8vw, 96px); font-weight: 300; color: var(--charcoal); letter-spacing: .04em; line-height: 1; margin-bottom: 8px; }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2.5vw, 26px); font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 32px; }
+  .hero-divider { width: 48px; height: 1px; background: var(--rose); margin: 0 auto 32px; }
+  .hero-tagline { font-size: 12px; font-weight: 300; letter-spacing: .2em; color: var(--muted); margin-bottom: 48px; }
+  .btn {
+    display: inline-block; padding: 14px 36px;
+    font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--cream); background: var(--charcoal); text-decoration: none;
+    border-radius: 2px; transition: background .2s;
+  }
+  .btn:hover { background: var(--rose); }
+  .btn-outline {
+    display: inline-block; padding: 13px 35px; margin-left: 12px;
+    font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--charcoal); background: transparent; text-decoration: none;
+    border: 1px solid var(--charcoal); border-radius: 2px; transition: all .2s;
+  }
+  .btn-outline:hover { background: var(--charcoal); color: var(--cream); }
+
+  /* SECTION COMMON */
+  section { padding: 96px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .25em; color: var(--rose); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: var(--charcoal); line-height: 1.15; margin-bottom: 16px; }
+  .section-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 520px; }
+
+  /* SERVICES */
+  #servicios { background: var(--cream); }
+  .services-header { text-align: center; margin-bottom: 64px; }
+  .services-header .section-body { margin: 0 auto; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .service-card {
+    background: #fff; border-radius: 4px; padding: 40px 32px;
+    border: 1px solid rgba(196,132,111,.15);
+    transition: transform .2s, box-shadow .2s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--rose-lt); transition: background .2s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(44,34,24,.08); }
+  .service-card:hover::before { background: var(--rose); }
+  .service-card.featured { background: var(--charcoal); }
+  .service-card.featured::before { background: var(--rose); }
+  .service-tag {
+    font-size: 9px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 20px; display: block;
+  }
+  .service-card.featured .service-tag { color: var(--rose-lt); }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--charcoal); line-height: 1.15; margin-bottom: 4px; }
+  .service-card.featured .service-name { color: var(--cream); }
+  .service-sub { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 20px; }
+  .service-card.featured .service-sub { color: rgba(250,245,239,.6); }
+  .service-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+  .service-card.featured .service-desc { color: rgba(250,245,239,.7); }
+  .service-divider { width: 28px; height: 1px; background: var(--rose-lt); margin-bottom: 20px; }
+  .service-card.featured .service-divider { background: rgba(196,132,111,.5); }
+  .service-price { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--charcoal); letter-spacing: .02em; }
+  .service-card.featured .service-price { color: var(--cream); }
+  .service-price span { font-size: 14px; font-weight: 300; color: var(--muted); margin-left: 4px; }
+  .service-card.featured .service-price span { color: rgba(250,245,239,.6); }
+  .service-image { width: 100%; height: 180px; object-fit: cover; border-radius: 3px; margin-bottom: 24px; display: block; }
+
+  /* ABOUT */
+  #sobre { background: var(--bg); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-visual {
+    aspect-ratio: 4/5; background: var(--rose-lt);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-text .section-body { margin-bottom: 32px; }
+  .about-stat { display: flex; gap: 40px; margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(196,132,111,.2); }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--charcoal); line-height: 1; }
+  .stat-label { font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: .1em; margin-top: 4px; }
+
+  /* PROCESO */
+  #proceso { background: var(--cream); }
+  .proceso-header { text-align: center; margin-bottom: 64px; }
+  .proceso-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .step { text-align: center; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--rose-lt); margin-bottom: 16px; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
+  .step-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+
+  /* CONTACT */
+  #contacto { background: var(--charcoal); }
+  .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .contact-inner .section-eyebrow { color: var(--rose); }
+  .contact-inner .section-title { color: var(--cream); }
+  .contact-inner .section-body { color: rgba(250,245,239,.6); margin: 0 auto 40px; }
+  .contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none; padding: 12px 24px;
+    border: 1px solid rgba(250,245,239,.2); border-radius: 2px; transition: all .2s;
+  }
+  .contact-link:hover { background: var(--rose); border-color: var(--rose); }
+
+  /* FOOTER */
+  footer { background: #1A1008; padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 11px; color: rgba(250,245,239,.3); letter-spacing: .1em; }
+
+  /* WHATSAPP FLOAT */
+  .whatsapp-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    transition: transform .2s, box-shadow .2s;
+    text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(37,211,102,.5); }
+  .whatsapp-float svg { width: 30px; height: 30px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .proceso-steps { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .proceso-steps { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Anne</a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sobre">Nosotras</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Buenos Aires · Maquillaje Profesional</p>
+  <h1 class="hero-title">Anne</h1>
+  <p class="hero-subtitle">studio</p>
+  <div class="hero-divider"></div>
+  <p class="hero-tagline">Realzamos tu belleza para cada momento especial</p>
+  <div>
+    <a href="#contacto" class="btn">Reservar turno</a>
+    <a href="#servicios" class="btn-outline">Ver servicios</a>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-inner">
+    <div class="services-header">
+      <p class="section-eyebrow">Lo que ofrecemos</p>
+      <h2 class="section-title">Nuestros servicios</h2>
+      <p class="section-body">Cada servicio está pensado para que te sientas segura, cómoda y radiante. Trabajamos con productos de primera calidad y técnicas actualizadas.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-tag">Social</span>
+        <p class="service-name">Maquillaje social</p>
+        <p class="service-sub">Para cada ocasión</p>
+        <p class="service-desc">Desde una salida casual hasta el evento más especial del finde. Base, contorno, ojos y labios con productos de alta duración.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Eventos</span>
+        <p class="service-name">Maquillaje para 15 años</p>
+        <p class="service-sub">El día más especial</p>
+        <p class="service-desc">Un look que realza tu belleza natural para que brilles en cada foto y recuerdes este día para siempre.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Novias</span>
+        <p class="service-name">Maquillaje de novia</p>
+        <p class="service-sub">Solo el día</p>
+        <p class="service-desc">Maquillaje nupcial completo para el día de tu casamiento. Look duradero, fotogénico y coordinado con tu vestido.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card featured">
+        <span class="service-tag">Más elegido ✦</span>
+        <p class="service-name">Pack Novia Completo</p>
+        <p class="service-sub">Prueba + día del casamiento</p>
+        <p class="service-desc">Incluye la prueba previa para definir el look perfecto y el maquillaje el día de tu casamiento. La experiencia completa para que nada quede al azar.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Cortejo</span>
+        <p class="service-name">Damas de honor y madrinas</p>
+        <p class="service-sub">Coordinado con el look novia</p>
+        <p class="service-desc">Porque la novia no brilla sola. Maquillaje armonioso para todo el cortejo, coordinado con el estilo del día.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Aprendizaje</span>
+        <p class="service-name">Clases de automaquillaje</p>
+        <p class="service-sub">Clase individual 1 a 1</p>
+        <p class="service-desc">Aprendé las técnicas, productos y secretos para maquillarte vos sola. Clase personalizada adaptada a tu tipo de piel y estilo.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Con propósito ✦</span>
+        <p class="service-name">Maquillaje terapéutico</p>
+        <p class="service-sub">Acompañamiento y cuidado</p>
+        <p class="service-desc">Pensado para personas que atraviesan una enfermedad o un tratamiento (oncológico, dermatológico, etc.) y quieren sentirse mejor con su imagen. Trabajamos con delicadeza, productos hipoalergénicos y a tu ritmo. No reemplaza atención médica.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Peinado</span>
+        <p class="service-name">Peinado y styling</p>
+        <p class="service-sub">Para tu look completo</p>
+        <p class="service-desc">Peinados profesionales para eventos, bodas y ocasiones especiales. Diseñamos un look que complemente tu maquillaje y estilo personal. Trabajamos con técnicas modernas y productos de calidad.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">Belleza</span>
+        <p class="service-name">Manicura y cuidado de manos</p>
+        <p class="service-sub">Manos perfectas</p>
+        <p class="service-desc">Manicura profesional con diseños personalizados. Cuidado, hidratación y esmaltado duradero. Coordinamos el color con tu maquillaje y outfit para un look integral y coordinado.</p>
+        <div class="service-divider"></div>
+        <p class="service-price" style="font-size:15px;letter-spacing:.04em;">Solicitá cotización</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=1200&auto=format&fit=crop" alt="Anne studio">
+      </div>
+      <div class="about-text">
+        <p class="section-eyebrow">Quiénes somos</p>
+        <h2 class="section-title">Maquillaje profesional con alma propia</h2>
+        <p class="section-body">En Anne creemos que el maquillaje es una herramienta para realzar tu belleza natural, no para cambiar quién sos. Cada trabajo es único, personalizado y pensado para que te sientas completamente vos misma.</p>
+        <p class="section-body" style="margin-top: 16px;">Trabajamos con productos de primera línea y técnicas actualizadas para garantizar resultados duraderos, fotogénicos y cómodos de usar.</p>
+        <p class="section-body" style="margin-top: 16px;">También ofrecemos maquillaje terapéutico para personas que están atravesando una enfermedad o un tratamiento y buscan sentirse mejor con su imagen. Es un servicio que hacemos con mucho cariño, pensado para acompañar, no para reemplazar ningún cuidado médico.</p>
+        <div class="about-stat">
+          <div>
+            <p class="stat-num">9</p>
+            <p class="stat-label">SERVICIOS DISPONIBLES</p>
+          </div>
+          <div>
+            <p class="stat-num">BA</p>
+            <p class="stat-label">BUENOS AIRES</p>
+          </div>
+          <div>
+            <p class="stat-num">✦</p>
+            <p class="stat-label">100% PERSONALIZADO</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-inner">
+    <div class="proceso-header">
+      <p class="section-eyebrow">Cómo trabajamos</p>
+      <h2 class="section-title">El proceso</h2>
+    </div>
+    <div class="proceso-steps">
+      <div class="step">
+        <p class="step-num">01</p>
+        <p class="step-title">Consulta</p>
+        <p class="step-desc">Nos contactás por Instagram o WhatsApp. Hablamos de tu evento, estilo y lo que buscás.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">02</p>
+        <p class="step-title">Reserva</p>
+        <p class="step-desc">Confirmamos fecha y horario. Para novias recomendamos reservar con 3 meses de anticipación.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">03</p>
+        <p class="step-title">Prueba</p>
+        <p class="step-desc">Para novias y 15 años hacemos una prueba previa para definir el look perfecto juntas.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">04</p>
+        <p class="step-title">El gran día</p>
+        <p class="step-desc">Llegamos a tiempo, trabajamos en un ambiente cómodo y te vas sintiéndote radiante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-inner">
+    <p class="section-eyebrow">Hablemos</p>
+    <h2 class="section-title" style="font-size: clamp(32px,5vw,52px); margin-bottom: 20px;">¿Reservamos tu turno?</h2>
+    <p class="section-body">Escribinos por Instagram o WhatsApp para consultar disponibilidad y coordinar tu turno. Respondemos a la brevedad.</p>
+    <div class="contact-links">
+      <a href="#" class="contact-link" onclick="return false;">@anne.studio</a>
+      <a href="https://wa.me/5491100000000?text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Anne." class="contact-link" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a href="https://wa.me/5491100000000?text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Anne." class="whatsapp-float" target="_blank" title="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+  </svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Anne studio · Buenos Aires</p>
+  <p>@anne.studio</p>
+</footer>
+
+</body></html>
